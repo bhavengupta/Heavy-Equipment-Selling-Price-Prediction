@@ -1,62 +1,88 @@
-# Heavy-Equipment-Selling-Price-Prediction
+# 🚜 Heavy Equipment Selling Price Prediction
 
-An end-to-end **machine learning regression project** for predicting the transaction value of heavy equipment using structured historical data. The project focuses on robust preprocessing, feature engineering, categorical feature handling, model comparison, and hyperparameter optimization for tabular regression.
+An end-to-end **machine learning regression project** focused on predicting the transaction value of heavy equipment using historical structured data, with emphasis on feature engineering, robust preprocessing, model comparison, and hyperparameter optimization.
 
-## Technical Approach
+🏆 Achieved a **Competition Leaderboard RMSLE of 0.19656** using an optimized XGBoost regression model.
 
-### 1. Exploratory Data Analysis
+---
 
-* Analyzed dataset dimensions, feature types, descriptive statistics, missing-value patterns, cardinality, and target distribution.
-* Examined numerical relationships and target skewness to guide preprocessing and feature engineering.
-* Removed features with excessive missingness and identifier columns that were not useful for prediction.
+## 📌 Overview
 
-### 2. Feature Engineering
+This project focuses on predicting the selling price of heavy equipment from historical transaction data.
 
-Created domain-informed features including:
+The workflow covers the complete machine learning pipeline — from **exploratory data analysis and feature engineering to preprocessing, model selection, hyperparameter tuning, and final prediction generation**.
 
-* **EquipmentAge** — calculated from transaction year and manufacture year.
-* **UsagePerYear** — operational hours normalized by equipment age.
-* **Frequency-based features** for high-cardinality categorical variables.
-* **Temporal features** from `TransactionDate`, including year, month, day, quarter, day of week, and day of year.
-* **Equipment attribute indicators** such as cabin and fork availability.
-* **Specification hierarchy features** combining base and subclass information.
-* **Ordinal representation** of `AssetScaleFactor` based on its natural ordering.
+The project emphasizes handling real-world tabular data challenges such as missing values, high-cardinality categorical variables, temporal features, and skewed target distributions.
 
-### 3. Preprocessing
+---
 
-Implemented a reusable **scikit-learn preprocessing pipeline** using `ColumnTransformer`.
+## 🏆 Achievement
 
-* **Numerical features:** Median imputation.
-* **Low-cardinality categorical features:** Most-frequent imputation + One-Hot Encoding.
-* **High-cardinality categorical features:** Most-frequent imputation + Ordinal Encoding with explicit handling of unseen categories.
-* **Target:** `log1p` transformation to reduce skewness and align the training objective with RMSLE-based evaluation.
+* Achieved **0.19656 RMSLE** on the competition leaderboard
+* Developed an end-to-end tabular regression pipeline
+* Compared multiple machine learning regression approaches
+* Applied feature engineering based on equipment and transaction characteristics
+* Optimized the final model using iterative hyperparameter tuning
 
-### 4. Model Development
+---
 
-Compared three regression approaches:
+## 🚀 Features
 
-1. **Linear Regression** — baseline linear model.
-2. **Random Forest Regressor** — ensemble of decision trees for capturing nonlinear relationships.
-3. **XGBoost Regressor** — gradient-boosted decision trees used as the final model.
+* 📊 Exploratory data analysis and target distribution analysis
+* 🔧 Domain-informed feature engineering
+* 🧹 Robust missing-value handling
+* 🔤 One-Hot and Ordinal Encoding for categorical variables
+* 📅 Temporal feature extraction from transaction dates
+* 🌲 Multiple regression model comparison
+* ⚙️ Hyperparameter optimization using GridSearchCV
+* 🚀 XGBoost-based final prediction model
+* 📈 RMSLE-based model evaluation
+* 🔄 Reusable scikit-learn preprocessing pipeline
 
-Random Forest hyperparameters were optimized using **3-fold GridSearchCV**.
+---
 
-XGBoost was tuned iteratively across parameters including:
+## 🧠 Feature Engineering
 
-* Tree depth
-* Learning rate
-* Number of estimators
-* Row and column subsampling
-* Minimum child weight
-* L1/L2 regularization
+Created domain-informed features to improve predictive performance:
 
-## Final Model
+* **EquipmentAge** — calculated using transaction year and manufacture year
+* **UsagePerYear** — operational hours normalized by equipment age
+* **Frequency Encoding** — applied to high-cardinality categorical features
+* **Temporal Features** — extracted year, month, day, quarter, day of week, and day of year from `TransactionDate`
+* **Equipment Indicators** — represented attributes such as cabin and fork availability
+* **Specification Hierarchy** — combined base and subclass equipment information
+* **Ordinal Features** — represented `AssetScaleFactor` according to its natural ordering
 
-The final **XGBoost** configuration used histogram-based tree construction with controlled tree complexity, subsampling, column sampling, and regularization.
+---
 
-After validation, the model was retrained on the complete training dataset before generating test predictions.
+## ⚙️ Preprocessing
 
-## Results
+Implemented a reusable preprocessing pipeline using **scikit-learn `ColumnTransformer`**.
+
+### Numerical Features
+
+* Median imputation
+
+### Low-Cardinality Categorical Features
+
+* Most-frequent imputation
+* One-Hot Encoding
+
+### High-Cardinality Categorical Features
+
+* Most-frequent imputation
+* Ordinal Encoding
+* Explicit handling of unseen categories
+
+### Target Transformation
+
+Applied `log1p` transformation to the target variable to reduce skewness and better align the training objective with **RMSLE evaluation**.
+
+---
+
+## 🤖 Model Development
+
+Three regression approaches were evaluated:
 
 | Model             | Validation RMSLE |
 | ----------------- | ---------------: |
@@ -64,9 +90,132 @@ After validation, the model was retrained on the complete training dataset befor
 | Random Forest     |           ~0.220 |
 | XGBoost           |           ~0.200 |
 
-**Competition Leaderboard RMSLE: 0.19656**
+### Models Used
 
-## Tech Stack
+**Linear Regression**
 
-**Python · Pandas · NumPy · Scikit-learn · XGBoost · Matplotlib**
+Used as a baseline model to establish initial predictive performance.
+
+**Random Forest Regressor**
+
+Used to capture nonlinear relationships through an ensemble of decision trees.
+
+**XGBoost Regressor**
+
+Used as the final model due to its strong performance on structured/tabular data.
+
+---
+
+## 🔬 Hyperparameter Optimization
+
+### Random Forest
+
+Optimized using **3-Fold GridSearchCV**.
+
+### XGBoost
+
+Iteratively tuned across parameters including:
+
+* Tree depth
+* Learning rate
+* Number of estimators
+* Row subsampling
+* Column subsampling
+* Minimum child weight
+* L1 regularization
+* L2 regularization
+
+The final XGBoost configuration used **histogram-based tree construction**, controlled tree complexity, subsampling, column sampling, and regularization.
+
+---
+
+## 📈 Results
+
+The models showed significant improvement as model complexity and nonlinear learning capabilities increased.
+
+**Validation Performance:**
+
+* Linear Regression → **~0.451 RMSLE**
+* Random Forest → **~0.220 RMSLE**
+* XGBoost → **~0.200 RMSLE**
+
+🏆 **Final Competition Leaderboard RMSLE: 0.19656**
+
+XGBoost provided the strongest performance and was retrained on the complete training dataset before generating final test predictions.
+
+---
+
+## 🛠️ Tech Stack
+
+### Programming Language
+
+* Python
+
+### Data Processing & Analysis
+
+* NumPy
+* Pandas
+
+### Machine Learning
+
+* Scikit-learn
+* XGBoost
+
+### Visualization
+
+* Matplotlib
+
+---
+
+## 📊 Methodology
+
+The overall workflow followed:
+
+```text
+Raw Dataset
+     ↓
+Exploratory Data Analysis
+     ↓
+Data Cleaning
+     ↓
+Feature Engineering
+     ↓
+Categorical & Numerical Preprocessing
+     ↓
+Target Transformation
+     ↓
+Model Comparison
+     ↓
+Hyperparameter Optimization
+     ↓
+Model Validation
+     ↓
+Final XGBoost Model
+     ↓
+Test Prediction
+```
+
+---
+
+## 💡 Applications
+
+The techniques used in this project can be applied to:
+
+* 🚜 Heavy equipment price estimation
+* 💰 Used equipment valuation
+* 📊 Market price analysis
+* 📈 Asset valuation
+* 🔮 Transaction price prediction
+* 🏗️ Construction equipment analytics
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Bhaven Gupta**
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+**© 2026 Bhaven Gupta. All Rights Reserved.**
+
 
